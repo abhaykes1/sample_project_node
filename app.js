@@ -37,9 +37,10 @@ app.get('/', function(req, res) {
 });
 
 app.post('/', function(req, res) {
-  var ingredient = req.body;
+  const data = Object.keys(req.body)[0];
+  const ingredient = JSON.parse(data);
+  console.log("POST From SERVER");
   ingredients.push(ingredient);
-  console.log('body:', req.body)
   res.status(200).send("Successfully posted ingredient");
 });
 
