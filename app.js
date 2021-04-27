@@ -1,4 +1,5 @@
 const express = require("express");
+const fetch = require('node-fetch');
 
 const app = express();
 
@@ -30,12 +31,29 @@ var ingredients = [
   },
 ];
 
+var getSubmission = async (submitUrl) => {
+  const response = await fetch(submitUrl, {
+      method: 'GET',
+      headers: {
+          'Content-Type': 'application/json'
+      }
+  })
+  const resData = await response.json();
+  return resData;
+}
 
 app.get('/', function(req, res) {
   console.log("GET From SERVER");
   res.send(ingredients);
 });
 
+app.get('/jobs', (req,res)=>{
+  fetch('https://jobs.github.com/positions.json?page=1&search=code')
+    .then(res => res.json())
+    .then(json => {
+      res.send(json).status(200);
+    }) 
+})
 app.post('/', function(req, res) {
   const data = Object.keys(req.body)[0];
   const ingredient = JSON.parse(data);
