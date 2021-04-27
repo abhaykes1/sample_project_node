@@ -37,7 +37,7 @@ app.get('/', function(req, res) {
 });
 
 app.get('/jobs', (req,res)=>{
-  fetch('https://jobs.github.com/positions.json?page=1&search=code')
+  fetch('http://jobs.github.com/positions.json?page=1&search=code')
     .then(res => res.json())
     .then(json => {
       res.send(json).status(200);
