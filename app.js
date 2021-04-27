@@ -31,17 +31,6 @@ var ingredients = [
   },
 ];
 
-var getSubmission = async (submitUrl) => {
-  const response = await fetch(submitUrl, {
-      method: 'GET',
-      headers: {
-          'Content-Type': 'application/json'
-      }
-  })
-  const resData = await response.json();
-  return resData;
-}
-
 app.get('/', function(req, res) {
   console.log("GET From SERVER");
   res.send(ingredients);
